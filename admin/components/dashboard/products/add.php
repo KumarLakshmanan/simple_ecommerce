@@ -63,7 +63,7 @@
         var retailer_price = $("#retailer_price").val();
         var mrp_price = $("#mrp_price").val();
         var description = $("#description").val();
-
+		var images = [];
 		$(".uploaded-image").each(function() {
 			images.push($(this).attr("data-name"));
 		});

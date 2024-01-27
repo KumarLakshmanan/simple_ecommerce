@@ -76,6 +76,7 @@ if (isset($_GET['productid'])) {
                 var retailer_price = $("#retailer_price").val();
                 var mrp_price = $("#mrp_price").val();
                 var description = $("#description").val();
+                var images = [];
 
                 $(".uploaded-image").each(function() {
                     images.push($(this).attr("data-name"));
@@ -97,7 +98,7 @@ if (isset($_GET['productid'])) {
                     }).then((willDelete) => {
                         if (willDelete) {
                             var formData = new FormData();
-                            formData.append("mode", "editevent");
+                            formData.append("mode", "editproduct");
                             formData.append("product_name", name);
                             formData.append("product_description", description);
                             formData.append("distributor_price", distributor_price);

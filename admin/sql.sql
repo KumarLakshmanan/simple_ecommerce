@@ -18,3 +18,7 @@ ALTER TABLE `products`
 
 ALTER TABLE `products`
 	ADD `product_description` TEXT NOT NULL AFTER `product_name`;
+
+-- edit updated_at and CURRENT_TIMESTAMP
+ALTER TABLE `products`
+	CHANGE `updated_at` `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;

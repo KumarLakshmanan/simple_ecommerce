@@ -41,7 +41,7 @@ if (isset($_GET["id"])) {
                 <?php
                 if ($pageId == "products") {
                     include "dashboard/products.php";
-                } elseif ($pageId == "editproducts") {
+                } elseif ($pageId == "editproduct") {
                     include "dashboard/products/edit.php";
                 } elseif ($pageId == "addproduct") {
                     include "dashboard/products/add.php";
