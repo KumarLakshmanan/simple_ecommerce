@@ -1,6 +1,4 @@
 <?php
-
-
 $sql = "SELECT * FROM products ORDER BY id DESC";
 $stmt = $pdoConn->prepare($sql);
 $stmt->execute();
@@ -28,7 +26,7 @@ $result = $stmt->fetchAll();
             <thead>
                 <tr>
                     <th class="border-top-0">#</th>
-                    <th class="border-top-0">Title</th>
+                    <th class="border-top-0">Product Name</th>
                     <th class="border-top-0">Dis. Price</th>
                     <th class="border-top-0">Ret. Price</th>
                     <th class="border-top-0">MRP Price</th>
