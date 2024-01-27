@@ -39,28 +39,12 @@ if (isset($_GET["id"])) {
         <div class="page-wrapper mt-5">
             <div class="container-fluid">
                 <?php
-                if ($pageId == "events") {
-                    include "dashboard/events.php";
-                } elseif ($pageId == "editevent") {
-                    include "dashboard/event/edit.php";
-                } elseif ($pageId == "addevent") {
-                    include "dashboard/event/add.php";
-                } else if ($pageId == 'adddirection') {
-                    include "dashboard/direction/add.php";
-                } else if ($pageId == 'editdirection') {
-                    include "dashboard/direction/edit.php";
-                } else if ($pageId == 'direction') {
-                    include "dashboard/direction.php";
-                } else if ($pageId == 'emergency') {
-                    include "dashboard/emergency.php";
-                } elseif ($pageId == "users") {
-                    include "dashboard/users.php";
-                } elseif ($pageId == "admins") {
-                    include "dashboard/admins.php";
-                } elseif ($pageId == "notification") {
-                    include "dashboard/notification.php";
-                } elseif ($pageId == "messages") {
-                    include "dashboard/messages.php";
+                if ($pageId == "products") {
+                    include "dashboard/products.php";
+                } elseif ($pageId == "editproducts") {
+                    include "dashboard/products/edit.php";
+                } elseif ($pageId == "addproduct") {
+                    include "dashboard/products/add.php";
                 } else {
                     include "dashboard/home.php";
                 }

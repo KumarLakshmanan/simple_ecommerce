@@ -58,8 +58,6 @@ $_SESSION['csrfToken'] = $csrfToken;
             width: 1em;
         }
 
-        /* layout/base.css */
-
         body {
             color: #000;
             font-family: 'Open Sans', sans-serif;
@@ -161,8 +159,7 @@ $_SESSION['csrfToken'] = $csrfToken;
     <div class="grid">
         <form action="<?= $baseUrl ?>api/v1.php" method="POST" class="form login">
             <input type="hidden" name="mode" value="adminlogin">
-            <img src="img/icon-black.png" alt="" width="100px">
-            <h2 class="login__title">Login to Waster Admin</h2>
+            <h2 class="login__title">Login to Ecommerce Admin</h2>
             <div class="form__field">
                 <label for="login__username"><svg class="icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>

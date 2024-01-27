@@ -1,7 +1,7 @@
 <?php
 
 
-$sql = "SELECT * FROM directions ORDER BY id DESC";
+$sql = "SELECT * FROM products ORDER BY id DESC";
 $stmt = $pdoConn->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -10,11 +10,11 @@ $result = $stmt->fetchAll();
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box text-end">
-            <a href="<?= $adminBaseUrl ?>adddirection" class="btn btn-success text-white">
+            <a href="<?= $adminBaseUrl ?>addproduct" class="btn btn-success text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
                     <path fill="currentColor" d="M17 15V8h-2v7H8v2h7v7h2v-7h7v-2z" />
                 </svg>
-                Add new direction
+                Add new product
             </a>
         </div>
     </div>
@@ -23,7 +23,7 @@ $result = $stmt->fetchAll();
     <div class="col-md-12 col-lg-12 col-sm-12">
         <div class="white-box">
             <div class="d-md-flex mb-3">
-                <h3 class="box-title mb-0">All directions</h3>
+                <h3 class="box-title mb-0">All products</h3>
             </div>
             <div class="table-responsive">
                 <table class="table no-wrap bDataTable" id="bDataTable">
@@ -31,8 +31,10 @@ $result = $stmt->fetchAll();
                         <tr>
                             <th class="border-top-0">#</th>
                             <th class="border-top-0">Title</th>
-                            <th class="border-top-0">Lat/Lng</th>
-                            <th class="border-top-0">Date</th>
+                            <th class="border-top-0">Dis. Price</th>
+                            <th class="border-top-0">Ret. Price</th>
+                            <th class="border-top-0">MRP Price</th>
+                            <th class="border-top-0">Created Date</th>
                             <th class="border-top-0">Action</th>
                         </tr>
                     </thead>
@@ -47,20 +49,12 @@ $result = $stmt->fetchAll();
                                     echo $value['name'];
                                     ?>
                                 </td>
+                                <td><?php echo $value['distributor_price']; ?></td>
+                                <td><?php echo $value['retailer_price']; ?></td>
+                                <td><?php echo $value['mrp_price']; ?></td>
+                                <td><?php echo date('d M h:i A', strtotime($value['created_at'])); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=<?= $value['latitude'] ?>,<?= $value['longitude'] ?>" target="_blank">
-                                        <?php
-                                        echo $value['latitude'] . '/' . $value['longitude'];
-                                        ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo date_format(date_create($value['created_date']), 'd-m-Y');
-                                    ?>
-                                </td>
-                                <td>
-                                    <a href="<?= $adminBaseUrl ?>editdirection?directionid=<?= $value['id'] ?>" class="btn btn-info">
+                                    <a href="<?= $adminBaseUrl ?>editproduct?productid=<?= $value['id'] ?>" class="btn btn-info">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="#" onclick="if(confirm('Are you sure to delete ?')){deleteCode('<?= $value['id'] ?>')}" class="btn btn-danger">
@@ -87,8 +81,8 @@ $result = $stmt->fetchAll();
             url: "<?= $apiUrl ?>",
             type: 'POST',
             data: {
-                directionid: $id,
-                mode: 'deletedirection'
+                productid: $id,
+                mode: 'deleteproduct'
             },
             success: function(data) {
                 if (data.error.code == '#200') {

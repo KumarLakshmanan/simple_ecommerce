@@ -1,34 +1,55 @@
 <?php
 
-if (isset($_GET['directionid'])) {
-    $id = $_GET['directionid'];
-    $sql = "SELECT * FROM directions WHERE id = $id";
+
+if (isset($_GET['productid'])) {
+    $id = $_GET['productid'];
+    $sql = "SELECT * FROM products WHERE id = $id";
     $stmt = $pdoConn->prepare($sql);
     $stmt->execute();
     $propertyEdit = $stmt->fetchAll();
     if (count($propertyEdit) > 0) {
 ?>
-        <h3><b>Fill the Following Form To edit direction</b></h3>
+        <h3><b>Fill the Following Form To Add product</b></h3>
         <br />
         <div class="row">
             <div class="col-md-6">
-                <h6>Direction Title *</h6>
+                <h6>Product Name *</h6>
                 <div class="p-2">
-                    <input type="text" class="form-control" id="name" placeholder="Enter direction name" required value="<?= $propertyEdit[0]['name'] ?>">
+                    <input type="text" class="form-control" id="name" placeholder="Enter product name" required value="<?php echo ($propertyEdit[0]['product_name']); ?>">
                 </div>
             </div>
+
             <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-                <h6>Direction Lattitude *</h6>
+                <h6>Distributor Price *</h6>
                 <div class="p-2">
-                    <input type="text" class="form-control" id="latitude" placeholder="Enter direction lattitude" required value="<?= $propertyEdit[0]['latitude'] ?>">
+                    <input type="text" class="form-control" id="distributor_price" placeholder="Enter product distributor price" required value="<?php echo ($propertyEdit[0]['distributor_price']); ?>">
                 </div>
             </div>
+
             <div class="col-md-6">
-                <h6>Direction Longitude *</h6>
+                <h6>Retailer Price *</h6>
                 <div class="p-2">
-                    <input type="text" class="form-control" id="longitude" placeholder="Enter direction longitude" required value="<?= $propertyEdit[0]['longitude'] ?>">
+                    <input type="text" class="form-control" id="retailer_price" placeholder="Enter product retailer price" required value="<?php echo ($propertyEdit[0]['retailer_price']); ?>">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h6>M.R.P Price *</h6>
+                <div class="p-2">
+                    <input type="text" class="form-control" id="mrp_price" placeholder="Enter product mrp price" required value="<?php echo ($propertyEdit[0]['mrp_price']); ?>">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <h6>Product Description *</h6>
+                <div class="p-2">
+                    <textarea rows="5" class="form-control texteditor-content" id="description" placeholder="Enter product description" required><?php echo ($propertyEdit[0]['product_description']); ?></textarea>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="p-2">
+                    <label for="images">Product Images *</label>
+                    <div class="input-images" id="images" style="padding-top: .5rem;background: white"></div>
                 </div>
             </div>
         </div>
@@ -46,13 +67,20 @@ if (isset($_GET['directionid'])) {
                 "baseURL": "<?= $baseUrl ?>",
                 "auth": "<?= $_SESSION['token'] ?>",
                 "username": "<?= $_SESSION['email'] ?>",
+                "alreadyUploaded": "<?php echo ($propertyEdit[0]['product_images']); ?>",
             };
+
             $(".saveButton").click(function() {
                 var name = $("#name").val();
-                var latitude = $("#latitude").val();
-                var longitude = $("#longitude").val();
+                var distributor_price = $("#distributor_price").val();
+                var retailer_price = $("#retailer_price").val();
+                var mrp_price = $("#mrp_price").val();
+                var description = $("#description").val();
 
-                if (name == "" || latitude == "" || longitude == "") {
+                $(".uploaded-image").each(function() {
+                    images.push($(this).attr("data-name"));
+                });
+                if (name == "" || distributor_price == "" || retailer_price == "" || mrp_price == "" || description == "") {
                     swal({
                         icon: 'error',
                         type: 'error',
@@ -62,19 +90,23 @@ if (isset($_GET['directionid'])) {
                 } else {
                     swal({
                         title: 'Are you sure to publish?',
-                        text: "The post will be saved and pushed to the server!",
+                        text: "This will be saved and pushed to the server!",
                         icon: 'warning',
                         buttons: true,
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
                             var formData = new FormData();
-                            formData.append("mode", "editdirection");
-                            formData.append("directionid", "<?= $propertyEdit[0]['id'] ?>");
-                            formData.append("title", name);
-                            formData.append("latitude", latitude);
-                            formData.append("longitude", longitude);
+                            formData.append("mode", "editevent");
+                            formData.append("product_name", name);
+                            formData.append("product_description", description);
+                            formData.append("distributor_price", distributor_price);
+                            formData.append("retailer_price", retailer_price);
+                            formData.append("mrp_price", mrp_price);
+                            formData.append("product_images", images);
+                            formData.append("productid", "<?= $propertyEdit[0]['id'] ?>");
                             $(".preloader").show();
+
                             $.ajax({
                                 url: "<?= $apiUrl ?>",
                                 type: "POST",
@@ -88,7 +120,7 @@ if (isset($_GET['directionid'])) {
                                         swal({
                                             title: 'Success!',
                                             icon: 'success',
-                                            text: "Your direction has been saved successfully!",
+                                            text: "Your product has been updated successfully!",
                                             confirmButtonText: 'Ok'
                                         }).then((result) => {
                                             window.location.reload();
