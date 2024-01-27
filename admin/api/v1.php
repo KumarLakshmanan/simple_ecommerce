@@ -23,35 +23,6 @@ $emailRegex  =  '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
 $phoneRegex  =  '/^[0-9]{10}$/';
 $nameRegex   =  '/^[a-zA-Z ]{2,30}$/';
 
-
-function sendGCM($title, $message, $id)
-{
-    $serverKey = 'AAAA2UFn85k:APA91bGul4JaKjNhqETgWEYMA0Jm2rm9Jv9GKEOfTP7yO_2nXi4RrAJX6j2miMfufcJtT0urZJLmHgWvHzQwKPVca1SgLMBqdJyMzN7BX3EX0WoFZ3vMDecXPQ7iig1GZZJ0bxv8CCgM';
-    $url = 'https://fcm.googleapis.com/fcm/send';
-    $fields = array(
-        'registration_ids' => $id,
-        'data' => array(
-            "title" => $title,
-            "message" => $message,
-        )
-    );
-    $fields = json_encode($fields);
-    $headers = array(
-        'Authorization: key=' . $serverKey,
-        'Content-Type: application/json'
-    );
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-
 $datetime = date("Y-m-d H:i:s");
 if (isset($_REQUEST["mode"])) {
     $mode = $_REQUEST["mode"];
