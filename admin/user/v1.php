@@ -105,7 +105,7 @@ if (isset($_REQUEST["action"])) {
             $image = array_filter($image);
             $imgArr = array();
             for ($j = 0; $j < count($image); $j++) {
-                $imgArr[] = $baseUrl . "uploads/images/" . $image[$j];
+                $imgArr[] = $adminBaseUrl . "uploads/images/" . $image[$j];
             }
             $json["data"] = array(
                 "id" => $result["id"],

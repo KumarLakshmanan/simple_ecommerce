@@ -1,7 +1,7 @@
 <header class="topbar" data-navbarbg="skin5" style="position:fixed;width: 100%">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header" data-logobg="skin6">
-            <a class="navbar-brand" href="<?= $baseUrl ?>" target="_blank">
+            <a class="navbar-brand" href="<?= $adminBaseUrl ?>" target="_blank">
               
             </a>
             <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -9,7 +9,7 @@
         <ul class="navbar-nav ms-auto d-flex align-items-center px-2">
             <li>
                 <a class="profile-pic" href="#">
-                    <img src="<?= $baseUrl ?>img/varun.png" alt="user-img" width="36" class="img-circle"><span class="text-white font-medium">
+                    <img src="<?= $adminBaseUrl ?>img/varun.png" alt="user-img" width="36" class="img-circle"><span class="text-white font-medium">
                         <?php
                         if (isset($_SESSION['fullname'])) {
                             echo $_SESSION['fullname'];

@@ -375,17 +375,6 @@ function format_size($size)
     return substr($size, 0, $endIndex) . ' ' . $units[$i];
 }
 
-function convertImageUrlToBase64($filepath)
-{
-    if (strpos($filepath, CDN_URL) === false) {
-        return $filepath;
-    }
-    $filepath = str_replace(CDN_URL, "", $filepath);
-    $image_path = CDN_PATH . $filepath;
-    $image_data = file_get_contents($image_path);
-    $base64_data = base64_encode($image_data);
-    return "data:image/jpeg;base64," . $base64_data;
-}
 function getAllInviteesByUserId($userid)
 {
     $userFolder = BASE_PATH . "json/users/" . $userid . "/downline";

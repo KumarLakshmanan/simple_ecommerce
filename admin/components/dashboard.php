@@ -14,17 +14,17 @@ if (isset($_GET["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" type="text/css">
-    <link rel="stylesheet" href="<?= $baseUrl ?>css/richtext.min.css" type="text/css">
-    <link rel="stylesheet" href="<?= $baseUrl ?>css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="<?= $baseUrl ?>css/dashboard.css" type="text/css" />
-    <link rel="stylesheet" href="<?= $baseUrl ?>css/dataTables.bootstrap4.min.css">
-    <script src="<?= $baseUrl ?>js/jquery.min.js"></script>
-    <script src="<?= $baseUrl ?>js/sweetalert.js"></script>
-    <script src="<?= $baseUrl ?>js/jquery.dataTables.min.js"></script>
-    <script src="<?= $baseUrl ?>js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= $baseUrl ?>js/bootstrap.min.js"></script>
-    <script src="<?= $baseUrl ?>js/jquery.richtext.min.js"></script>
-    <script src="<?= $baseUrl ?>js/custom.js"></script>
+    <link rel="stylesheet" href="<?= $adminBaseUrl ?>css/richtext.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= $adminBaseUrl ?>css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?= $adminBaseUrl ?>css/dashboard.css" type="text/css" />
+    <link rel="stylesheet" href="<?= $adminBaseUrl ?>css/dataTables.bootstrap4.min.css">
+    <script src="<?= $adminBaseUrl ?>js/jquery.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/sweetalert.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/jquery.dataTables.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/bootstrap.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/jquery.richtext.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/custom.js"></script>
 </head>
 
 <body>

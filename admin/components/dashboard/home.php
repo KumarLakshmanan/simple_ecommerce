@@ -8,7 +8,7 @@ $today = date('Y-m-d');
 ?>
 <div class="p-3"></div>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-<link rel="stylesheet" href="<?= $baseUrl ?>css/material.css" type="text/css" />
+<link rel="stylesheet" href="<?= $adminBaseUrl ?>css/material.css" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
 <div class="container">
 	<div class="row">

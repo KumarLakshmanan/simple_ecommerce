@@ -57,14 +57,14 @@ if (isset($_GET['productid'])) {
             <button type="button" class="w-100 btn btn-primary saveButton">Save changes</button>
         </div>
 
-        <link href="<?= $baseUrl ?>css/image-uploader.min.css" rel="stylesheet" />
-        <script src="<?= $baseUrl ?>js/image-uploader.min.js"></script>
+        <link href="<?= $adminBaseUrl ?>css/image-uploader.min.css" rel="stylesheet" />
+        <script src="<?= $adminBaseUrl ?>js/image-uploader.min.js"></script>
         <script>
             $(document).ready(() => {
                 imageUploader.init(".input-images");
             })
             let _xUserData = {
-                "baseURL": "<?= $baseUrl ?>",
+                "baseURL": "<?= $adminBaseUrl ?>",
                 "auth": "<?= $_SESSION['token'] ?>",
                 "username": "<?= $_SESSION['email'] ?>",
                 "alreadyUploaded": "<?php echo ($propertyEdit[0]['product_images']); ?>",

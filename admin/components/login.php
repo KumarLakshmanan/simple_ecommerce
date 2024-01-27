@@ -10,8 +10,8 @@ $_SESSION['csrfToken'] = $csrfToken;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to Dashboard</title>
-    <script src="<?php echo $baseUrl ?>js/jquery.min.js"></script>
-    <script src="<?= $baseUrl ?>js/sweetalert.js"></script>
+    <script src="<?php echo $adminBaseUrl ?>js/jquery.min.js"></script>
+    <script src="<?= $adminBaseUrl ?>js/sweetalert.js"></script>
     <style media="screen">
         .align {
             -webkit-box-align: center;
@@ -157,7 +157,7 @@ $_SESSION['csrfToken'] = $csrfToken;
 
 <body class="align text--center">
     <div class="grid">
-        <form action="<?= $baseUrl ?>api/v1.php" method="POST" class="form login">
+        <form action="<?= $adminBaseUrl ?>api/v1.php" method="POST" class="form login">
             <input type="hidden" name="mode" value="adminlogin">
             <h2 class="login__title">Login to Ecommerce Admin</h2>
             <div class="form__field">
@@ -209,7 +209,7 @@ $_SESSION['csrfToken'] = $csrfToken;
                                 icon: 'success',
                                 confirmButtonText: 'Ok'
                             }).then((result) => {
-                                window.location.href = '<?= $baseUrl ?>';
+                                window.location.href = '<?= $adminBaseUrl ?>';
                             });
                         } else {
                             swal({
