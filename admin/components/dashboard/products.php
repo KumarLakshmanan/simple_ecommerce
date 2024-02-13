@@ -1,8 +1,9 @@
 <?php
 $sql = "SELECT * FROM products ORDER BY id DESC";
-$stmt = $pdoConn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll();
+// $stmt = $pdoConn->prepare($sql);
+// $stmt->execute();
+// $result = $stmt->fetchAll();
+$result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <div class="row">

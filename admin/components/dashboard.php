@@ -50,7 +50,7 @@ if (isset($_GET["id"])) {
                 }
                 ?>
             </div>
-            <footer class="footer text-center"> Created by <a href="https://kumarlakshmanan.github.io">Lakshmanan</a></footer>
+            <footer class="footer text-center"></footer>
         </div>
     </div>
 </body>

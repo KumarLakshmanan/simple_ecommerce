@@ -69,11 +69,15 @@ if (isset($_GET['username'])) {
     try {
         include("../lib/config.php");
         $username = $_GET['username'];
-        $sql = "SELECT * FROM users WHERE username = :username";
-        $stmt = $pdoConn->prepare($sql);
-        $stmt->bindParam(':username', $username);
+        $sql = "SELECT * FROM users WHERE username = ?";
+        // $stmt = $pdoConn->prepare($sql);
+        // $stmt->bindParam(':username', $username);
+        // $stmt->execute();
+        // $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->get_result();
         if ($user) {
             if ($user['photo']) {
                 header('Content-Type: image/png');

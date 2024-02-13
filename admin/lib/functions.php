@@ -40,21 +40,6 @@ function getTaxVal($total, $percent)
     return ($total * $percent) / 100;
 }
 
-function generateEpin()
-{
-    global $pdoConn;
-    $rand = rand(1000000000, 9999999999);
-    $sql = "SELECT id FROM pins WHERE pin_no = :pin";
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute(array(':pin' => $rand));
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row) {
-        generateEpin();
-    } else {
-        return $rand;
-    }
-}
-
 function getIpAddress()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -234,43 +219,6 @@ function sendGCMV2($data, $userData)
     return $gcmresult;
 }
 
-function getRowsCount($sql, $pdoConn)
-{
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return count($row);
-}
-function getRows($sql, $pdoConn)
-{
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $row;
-}
-function getRow($sql, $pdoConn)
-{
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $row;
-}
-function generateOfferPin($pdoConn)
-{
-    $pin = 'MB-';
-    $pin .= rand(1000, 9999) . '-';
-    $pin .= rand(1000, 9999) . '-';
-    $pin .= rand(1000, 9999);
-    $sql = "SELECT * FROM pin_offers WHERE pin_no = '$pin'";
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute();
-    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if (count($row) == 0) {
-        return $pin;
-    } else {
-        generateOfferPin($pdoConn);
-    }
-}
 function createTicket($tic, $category, $subject, $message, $user_id, $admin = false)
 {
     try {
@@ -447,35 +395,44 @@ function getSessionToken($db, String $username, int $id)
     $created_at = date('Y-m-d H:i:s');
     $token = md5($username . $id . $created_at);
     // more than 2 days old
-    $sql = "DELETE FROM `sessions` WHERE AuthId = :id AND created_at < DATE_SUB(NOW(), INTERVAL 2 DAY)";
+    // $sql = "DELETE FROM `sessions` WHERE AuthId = :id AND created_at < DATE_SUB(NOW(), INTERVAL 2 DAY)";
+    // $stmt = $db->prepare($sql);
+    // $stmt->bindParam(':id', $id);
+    // $stmt->execute();
+    // $ip = getClientIP();
+    // $sql = "INSERT INTO `sessions` (`AuthId`, `AuthUsername`, `AuthKey`, `created_at`, `ip_addr`) VALUES (:id, :username, :token, :created_at, :ip)";
+    // $stmt = $db->prepare($sql);
+    // $stmt->bindParam(':id', $id);
+    // $stmt->bindParam(':username', $username);
+    // $stmt->bindParam(':token', $token);
+    // $stmt->bindParam(':created_at', $created_at);
+    // $stmt->bindParam(':ip', $ip);
+    // $stmt->execute();
+    $sql = "DELETE FROM `sessions` WHERE AuthId = ? AND created_at < DATE_SUB(NOW(), INTERVAL 2 DAY)";
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(':id', $id);
+    $stmt->bind_param('i', $id);
     $stmt->execute();
     $ip = getClientIP();
-    $sql = "INSERT INTO `sessions` (`AuthId`, `AuthUsername`, `AuthKey`, `created_at`, `ip_addr`) VALUES (:id, :username, :token, :created_at, :ip)";
+    $sql = "INSERT INTO `sessions` (`AuthId`, `AuthUsername`, `AuthKey`, `created_at`, `ip_addr`) VALUES (?, ?, ?, ?, ?)";
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':token', $token);
-    $stmt->bindParam(':created_at', $created_at);
-    $stmt->bindParam(':ip', $ip);
+    $stmt->bind_param('issss', $id, $username, $token, $created_at, $ip);
     $stmt->execute();
     return $token;
 }
 
 function validateSessionToken($db, String $token, $username = null)
 {
-    $sql = "SELECT * FROM `sessions` WHERE `AuthKey` = :token LIMIT 1";
+    $sql = "SELECT * FROM `sessions` WHERE `AuthKey` = ? LIMIT 1";
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(':token', $token);
+    $stmt->bind_param('s', $token);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($stmt->rowCount() > 0) {
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $result = $result->fetch_assoc();
         if ($result['AuthUsername'] == $username) {
             return $result;
         }
     }
-    return false;
 }
 
 
@@ -536,11 +493,23 @@ function validateSession($db)
         $email = $_COOKIE['email'];
         $userAuth = validateSessionToken($db, $token, $email);
         if ($userAuth) {
-            $sql = "SELECT * FROM users WHERE email = :email";
+            // $sql = "SELECT * FROM users WHERE email = :email";
+            // $stmt = $db->prepare($sql);
+            // $stmt->bindParam(':email', $email);
+            // $stmt->execute();
+            // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            // $_SESSION['id'] = $result["id"];
+            // $_SESSION['email'] = $result["email"];
+            // $_SESSION['fullname'] = $result["fullname"];
+            // $_SESSION['email'] = $result["email"];
+            // $_SESSION['role'] = $result["role"];
+            // $_SESSION['token'] = $token;
+            $sql = "SELECT * FROM users WHERE email = ?";
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':email', $email);
+            $stmt->bind_param('s', $email);
             $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->get_result();
+            $result = $result->fetch_assoc();
             $_SESSION['id'] = $result["id"];
             $_SESSION['email'] = $result["email"];
             $_SESSION['fullname'] = $result["fullname"];
@@ -744,22 +713,4 @@ function random_num($length)
     }
     return $text;
 }
-
-function track($db, $version)
-{
-    $sql = "INSERT INTO `page_views` (`id`, `page`, `ip`, `date`, `time`, `referer`, `session_id`, `device`, `browser`, `agent`) VALUES (NULL, :page, :ip, :date, :time, :referer, :session_id, :device, :browser, :agent);";
-    $params = array(
-        ':page' => "updateregid",
-        ':ip' => getIpAddress(),
-        ':date' => date('Y-m-d'),
-        ':time' => date('H:i:s'),
-        ':referer' => "ANDROID APK",
-        ':session_id' => session_id(),
-        ':device' => $version,
-        ':browser' => "UNKNOWN",
-        ':agent' => "UNKNOWN"
-    );
-    $db->prepare($sql)->execute($params);
-}
-
-include(BASE_PATH . 'lib/timing.php');
+//include(BASE_PATH . 'lib/timing.php');

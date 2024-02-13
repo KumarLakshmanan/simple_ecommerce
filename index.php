@@ -7,17 +7,21 @@ if (isset($_GET["page"])) {
 } else {
 	$pageNumber = 1;
 }
+
+// $sql = "SELECT * FROM products ORDER BY id DESC";
+// $stmt = $pdoConn->prepare($sql);
+// $stmt->execute();
+// $result = $stmt->fetchAll();
+
 $sql = "SELECT * FROM products ORDER BY id DESC";
-$stmt = $pdoConn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll();
+$result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>E Commerce</title>
+	<title>Nalam</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -31,15 +35,15 @@ $result = $stmt->fetchAll();
 <body>
 	<nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">E Commerce</a>
+			<a class="navbar-brand" href="index.php"><img src='images/logo.png' width='200px' style='margin-right:10px;'></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto mr-md-3">
-					<li class="nav-item <?= $pageNumber == 1 ? "active" : "" ?>"><a href="index.php?page=1" class="nav-link">Page One</a></li>
-					<li class="nav-item <?= $pageNumber == 2 ? "active" : "" ?>"><a href="index.php?page=2" class="nav-link">Page Two</a></li>
-					<li class="nav-item <?= $pageNumber == 3 ? "active" : "" ?>"><a href="index.php?page=3" class="nav-link">Page Three</a></li>
+					<li class="nav-item <?= $pageNumber == 1 ? "active" : "" ?>"><a href="index.php?page=1" class="nav-link">Distributor</a></li>
+					<li class="nav-item <?= $pageNumber == 2 ? "active" : "" ?>"><a href="index.php?page=2" class="nav-link">Retailer</a></li>
+					<li class="nav-item <?= $pageNumber == 3 ? "active" : "" ?>"><a href="index.php?page=3" class="nav-link">Product Details</a></li>
 				</ul>
 			</div>
 		</div>
@@ -127,6 +131,21 @@ $result = $stmt->fetchAll();
 			border: 5px solid #558903;
 		}
 	</style>
+	<style>
+        .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #558903;
+        color: white;
+        text-align: center;
+        }
+    </style>
+
+    <div class="footer">
+        <p>3/23 Kunnathur Road, Perumanallur Tiruppur - 641666</p>
+    </div>
 </body>
 
 </html>

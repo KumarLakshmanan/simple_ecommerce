@@ -4,9 +4,10 @@
 if (isset($_GET['productid'])) {
     $id = $_GET['productid'];
     $sql = "SELECT * FROM products WHERE id = $id";
-    $stmt = $pdoConn->prepare($sql);
-    $stmt->execute();
-    $propertyEdit = $stmt->fetchAll();
+    // $stmt = $pdoConn->prepare($sql);
+    // $stmt->execute();
+    // $propertyEdit = $stmt->fetchAll();
+    $propertyEdit = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
     if (count($propertyEdit) > 0) {
 ?>
         <h3><b>Fill the Following Form To Add product</b></h3>

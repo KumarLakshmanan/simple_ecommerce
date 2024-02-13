@@ -22,10 +22,13 @@ $today = date('Y-m-d');
 						<p class="text-sm mb-0 text-capitalize">All Products</p>
 						<h4 class="mb-0">
 							<?php
+							// $sql = "SELECT count(id) as cnt FROM products";
+							// $stmt = $pdoConn->prepare($sql);
+							// $stmt->execute();
+							// $result = $stmt->fetch(PDO::FETCH_ASSOC);
+							// echo $result['cnt'] ?? 0;
 							$sql = "SELECT count(id) as cnt FROM products";
-							$stmt = $pdoConn->prepare($sql);
-							$stmt->execute();
-							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							$result = $mysqli->query($sql)->fetch_assoc();
 							echo $result['cnt'] ?? 0;
 							?>
 						</h4>
@@ -45,10 +48,13 @@ $today = date('Y-m-d');
 						<p class="text-sm mb-0 text-capitalize">Total Distributor Price</p>
 						<h4 class="mb-0">
 							<?php
+							// $sql = "SELECT SUM(distributor_price) as cnt FROM products";
+							// $stmt = $pdoConn->prepare($sql);
+							// $stmt->execute();
+							// $result = $stmt->fetch(PDO::FETCH_ASSOC);
+							// echo $result['cnt'] ?? 0;
 							$sql = "SELECT SUM(distributor_price) as cnt FROM products";
-							$stmt = $pdoConn->prepare($sql);
-							$stmt->execute();
-							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							$result = $mysqli->query($sql)->fetch_assoc();
 							echo $result['cnt'] ?? 0;
 							?>
 						</h4>
@@ -68,10 +74,13 @@ $today = date('Y-m-d');
 						<p class="text-sm mb-0 text-capitalize">Total Retailer Price</p>
 						<h4 class="mb-0">
 							<?php
+							// $sql = "SELECT SUM(retailer_price) as cnt FROM products";
+							// $stmt = $pdoConn->prepare($sql);
+							// $stmt->execute();
+							// $result = $stmt->fetch(PDO::FETCH_ASSOC);
+							// echo $result['cnt'] ?? 0;
 							$sql = "SELECT SUM(retailer_price) as cnt FROM products";
-							$stmt = $pdoConn->prepare($sql);
-							$stmt->execute();
-							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							$result = $mysqli->query($sql)->fetch_assoc();
 							echo $result['cnt'] ?? 0;
 							?>
 						</h4>
@@ -91,10 +100,13 @@ $today = date('Y-m-d');
 						<p class="text-sm mb-0 text-capitalize">Total MRP Price</p>
 						<h4 class="mb-0">
 							<?php
+							// $sql = "SELECT SUM(mrp_price) as cnt FROM products";
+							// $stmt = $pdoConn->prepare($sql);
+							// $stmt->execute();
+							// $result = $stmt->fetch(PDO::FETCH_ASSOC);
+							// echo $result['cnt'] ?? 0;
 							$sql = "SELECT SUM(mrp_price) as cnt FROM products";
-							$stmt = $pdoConn->prepare($sql);
-							$stmt->execute();
-							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							$result = $mysqli->query($sql)->fetch_assoc();
 							echo $result['cnt'] ?? 0;
 							?>
 						</h4>

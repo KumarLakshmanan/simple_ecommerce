@@ -1,20 +1,36 @@
 <?php
-define('HOSTNAME', 'localhost');
-date_default_timezone_set('Asia/Kolkata');
 
-define('SITE_URL', 'https://freelancing.codingfrontend.in/ecommerce/admin/');
-define('CDN_URL', 'https://freelancing.codingfrontend.in/ecommerce/admin/cdn/');
-define('DB_USERNAME', 'u707479837_ecommerce');
-define('DB_DATABASE', 'u707479837_ecommerce');
-define('DB_PASSWORD', '9yT#yM!6xC!');
-define("BASE_PATH", "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/");
-
-$apiUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/api/v1.php";
-$baseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
-$adminBaseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
-$uploadsDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/uploads/";
-$baseDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/";
-
+$hostname = $_SERVER['HTTP_HOST'];
+if (strpos($hostname, "codingfrontend")) {
+    define('HOSTNAME', 'localhost');
+    date_default_timezone_set('Asia/Kolkata');
+    define('SITE_URL', 'https://freelancing.codingfrontend.in/ecommerce/admin/');
+    define('CDN_URL', 'https://freelancing.codingfrontend.in/ecommerce/admin/cdn/');
+    define('DB_USERNAME', 'u707479837_ecommerce');
+    define('DB_DATABASE', 'u707479837_ecommerce');
+    define('DB_PASSWORD', '9yT#yM!6xC!');
+    define("BASE_PATH", "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/");
+    
+    $apiUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/api/v1.php";
+    $baseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
+    $adminBaseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
+    $uploadsDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/uploads/";
+    $baseDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/";
+} else {
+    define('HOSTNAME', 'localhost');
+    date_default_timezone_set('Asia/Kolkata');
+    define('SITE_URL', 'https://tentrecen.com/nalam/admin/');
+    define('CDN_URL', 'https://tentrecen.com/nalam/admin/cdn/');
+    define('DB_USERNAME', 'tentrecen_nalam');
+    define('DB_DATABASE', 'tentrecen_nalam');
+    define('DB_PASSWORD', 'zP3BxTwgRSBI');
+    define("BASE_PATH", "/home/tentrecen/public_html/nalam/admin/");
+    $apiUrl = "https://tentrecen.com/nalam/admin/api/v1.php";
+    $baseUrl = "https://tentrecen.com/nalam/admin/";
+    $adminBaseUrl = "https://tentrecen.com/nalam/admin/";
+    $uploadsDirectory = "/home/tentrecen/public_html/nalam/admin/uploads/";
+    $baseDirectory = "/home/tentrecen/public_html/nalam/admin/";
+}
 
 $phoneRegex = "/^[0-9]{10}$/";
 $pincodeRegex = "/^[0-9]{6}$/";
