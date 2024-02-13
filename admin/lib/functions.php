@@ -394,20 +394,6 @@ function getSessionToken($db, String $username, int $id)
 {
     $created_at = date('Y-m-d H:i:s');
     $token = md5($username . $id . $created_at);
-    // more than 2 days old
-    // $sql = "DELETE FROM `sessions` WHERE AuthId = :id AND created_at < DATE_SUB(NOW(), INTERVAL 2 DAY)";
-    // $stmt = $db->prepare($sql);
-    // $stmt->bindParam(':id', $id);
-    // $stmt->execute();
-    // $ip = getClientIP();
-    // $sql = "INSERT INTO `sessions` (`AuthId`, `AuthUsername`, `AuthKey`, `created_at`, `ip_addr`) VALUES (:id, :username, :token, :created_at, :ip)";
-    // $stmt = $db->prepare($sql);
-    // $stmt->bindParam(':id', $id);
-    // $stmt->bindParam(':username', $username);
-    // $stmt->bindParam(':token', $token);
-    // $stmt->bindParam(':created_at', $created_at);
-    // $stmt->bindParam(':ip', $ip);
-    // $stmt->execute();
     $sql = "DELETE FROM `sessions` WHERE AuthId = ? AND created_at < DATE_SUB(NOW(), INTERVAL 2 DAY)";
     $stmt = $db->prepare($sql);
     $stmt->bind_param('i', $id);
@@ -493,17 +479,6 @@ function validateSession($db)
         $email = $_COOKIE['email'];
         $userAuth = validateSessionToken($db, $token, $email);
         if ($userAuth) {
-            // $sql = "SELECT * FROM users WHERE email = :email";
-            // $stmt = $db->prepare($sql);
-            // $stmt->bindParam(':email', $email);
-            // $stmt->execute();
-            // $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            // $_SESSION['id'] = $result["id"];
-            // $_SESSION['email'] = $result["email"];
-            // $_SESSION['fullname'] = $result["fullname"];
-            // $_SESSION['email'] = $result["email"];
-            // $_SESSION['role'] = $result["role"];
-            // $_SESSION['token'] = $token;
             $sql = "SELECT * FROM users WHERE email = ?";
             $stmt = $db->prepare($sql);
             $stmt->bind_param('s', $email);

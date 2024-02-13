@@ -10,7 +10,7 @@ if (strpos($hostname, "codingfrontend")) {
     define('DB_DATABASE', 'u707479837_ecommerce');
     define('DB_PASSWORD', '9yT#yM!6xC!');
     define("BASE_PATH", "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/ecommerce/admin/");
-    
+
     $apiUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/api/v1.php";
     $baseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
     $adminBaseUrl = "https://freelancing.codingfrontend.in/ecommerce/admin/";
@@ -19,17 +19,17 @@ if (strpos($hostname, "codingfrontend")) {
 } else {
     define('HOSTNAME', 'localhost');
     date_default_timezone_set('Asia/Kolkata');
-    define('SITE_URL', 'https://tentrecen.com/nalam/admin/');
-    define('CDN_URL', 'https://tentrecen.com/nalam/admin/cdn/');
+    define('SITE_URL', 'https://nalamecoproducts.com/admin/');
+    define('CDN_URL', 'https://nalamecoproducts.com/admin/cdn/');
     define('DB_USERNAME', 'tentrecen_nalam');
     define('DB_DATABASE', 'tentrecen_nalam');
     define('DB_PASSWORD', 'zP3BxTwgRSBI');
-    define("BASE_PATH", "/home/tentrecen/public_html/nalam/admin/");
-    $apiUrl = "https://tentrecen.com/nalam/admin/api/v1.php";
-    $baseUrl = "https://tentrecen.com/nalam/admin/";
-    $adminBaseUrl = "https://tentrecen.com/nalam/admin/";
-    $uploadsDirectory = "/home/tentrecen/public_html/nalam/admin/uploads/";
-    $baseDirectory = "/home/tentrecen/public_html/nalam/admin/";
+    define("BASE_PATH", "/home/tentrecen/nalamecoproducts.com/admin/");
+    $apiUrl = "https://nalamecoproducts.com/admin/api/v1.php";
+    $baseUrl = "https://nalamecoproducts.com/admin/";
+    $adminBaseUrl = "https://nalamecoproducts.com/admin/";
+    $uploadsDirectory = "/home/tentrecen/nalamecoproducts.com/admin/uploads/";
+    $baseDirectory = "/home/tentrecen/nalamecoproducts.com/admin/";
 }
 
 $phoneRegex = "/^[0-9]{10}$/";
