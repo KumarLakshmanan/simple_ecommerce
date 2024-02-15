@@ -48,23 +48,23 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 			</div>
 		</div>
 	</nav>
-	<div>
-		<div class="table-responsive container py-5">
+	<div style="overflow-x:auto;">
+		<div class="py-5 container-fluid">
 			<table class="table no-wrap bDataTable" id="bDataTable">
 				<thead>
 					<tr>
-						<th class="border-top-0" width="20px">#</th>
-						<th class="border-top-0">Product Name</th>
+						<th class="border-top-0" width="30px">#</th>
+						<th style="white-space: nowrap;" class="border-top-0">Product Name</th>
 						<?php
 						if ($pageNumber == 1) {
 						?>
-							<th class="border-top-0">Distributor Price</th>
+							<th style="white-space: nowrap;" class="border-top-0">Distributor Price</th>
 						<?php
 						}
 						if ($pageNumber != 3) {
 						?>
-							<th class="border-top-0">Retailer Price</th>
-							<th class="border-top-0">MRP</th>
+							<th style="white-space: nowrap;" class="border-top-0">Retailer Price</th>
+							<th style="white-space: nowrap;" class="border-top-0">MRP</th>
 						<?php
 						}
 						?>
@@ -75,11 +75,11 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 					foreach ($result as $key => $value) {
 					?>
 						<tr>
-							<td><?php echo $key + 1; ?></td>
+							<td style="white-space: nowrap;">NTP-<?php echo $value['id']; ?></td>
 							<td>
 								<?php
-									$images = explode(",", $value['product_images']);
-									echo "<img src='admin/uploads/images/" . $images[0] . "' width='100px' style='margin-right:10px;'>" . $value['product_name'];
+								$images = explode(",", $value['product_images']);
+								echo "<img src='admin/uploads/images/" . $images[0] . "' width='100px' style='margin-right:10px;'>" . $value['product_name'];
 								?>
 							</td>
 							<?php
@@ -128,24 +128,24 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 
 		thead th,
 		tbody td {
-			border: 5px solid #558903;
+			border: 3px solid #558903;
 		}
 	</style>
 	<style>
-        .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #558903;
-        color: white;
-        text-align: center;
-        }
-    </style>
+		.footer {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			background-color: #558903;
+			color: white;
+			text-align: center;
+		}
+	</style>
 
-    <div class="footer">
-        <p>3/23 Kunnathur Road, Perumanallur Tiruppur - 641666</p>
-    </div>
+	<div class="footer">
+		<p>3/23 Kunnathur Road, Perumanallur Tiruppur - 641666</p>
+	</div>
 </body>
 
 </html>

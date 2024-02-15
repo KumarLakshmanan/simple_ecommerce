@@ -28,13 +28,6 @@
 			<input type="text" class="form-control" id="mrp_price" placeholder="Enter product mrp price" required>
 		</div>
 	</div>
-
-	<div class="col-12">
-		<h6>Product Description *</h6>
-		<div class="p-2">
-			<textarea rows="5" class="form-control texteditor-content" id="description" placeholder="Enter product description" required></textarea>
-		</div>
-	</div>
 	<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 		<div class="p-2">
 			<label for="images">Product Images *</label>
@@ -62,12 +55,11 @@
         var distributor_price = $("#distributor_price").val();
         var retailer_price = $("#retailer_price").val();
         var mrp_price = $("#mrp_price").val();
-        var description = $("#description").val();
 		var images = [];
 		$(".uploaded-image").each(function() {
 			images.push($(this).attr("data-name"));
 		});
-		if (name == "" || distributor_price == "" || retailer_price == "" || mrp_price == "" || description == "") {
+		if (name == "" || distributor_price == "" || retailer_price == "" || mrp_price == "") {
 			swal({
 				icon: 'error',
 				type: 'error',
@@ -86,7 +78,7 @@
 					var formData = new FormData();
 					formData.append("mode", "addevent");
 					formData.append("product_name", name);
-                    formData.append("product_description", description);
+                    formData.append("product_description", "");
                     formData.append("distributor_price", distributor_price);
                     formData.append("retailer_price", retailer_price);
                     formData.append("mrp_price", mrp_price);

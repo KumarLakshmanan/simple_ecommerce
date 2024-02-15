@@ -10747,18 +10747,12 @@ h5,
   position: relative;
   opacity: 1 !important;
 }
-.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-  color: #fc7fb2;
-}
 @media (max-width: 991.98px) {
   .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-  }
-  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-    color: #fff;
   }
 }
 .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
