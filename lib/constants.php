@@ -2,34 +2,19 @@
 
 $hostname = $_SERVER['HTTP_HOST'];
 date_default_timezone_set('Asia/Kolkata');
-if (strpos($hostname, "codingfrontend")) {
-    define('HOSTNAME', 'localhost');
-    define('SITE_URL', 'https://freelancing.codingfrontend.in/doctor/');
-    define('CDN_URL', 'https://freelancing.codingfrontend.in/doctor/cdn/');
-    define('DB_USERNAME', 'u707479837_ecommerce');
-    define('DB_DATABASE', 'u707479837_ecommerce');
-    define('DB_PASSWORD', '9yT#yM!6xC!');
-    define("BASE_PATH", "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/");
+define('HOSTNAME', 'localhost');
+define('SITE_URL', 'https://freelancing.codingfrontend.in/doctor/');
+define('CDN_URL', 'https://freelancing.codingfrontend.in/doctor/cdn/');
+define('DB_USERNAME', 'u707479837_ecommerce');
+define('DB_DATABASE', 'u707479837_ecommerce');
+define('DB_PASSWORD', '9yT#yM!6xC!');
+define("BASE_PATH", "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/");
 
-    $apiUrl = "https://freelancing.codingfrontend.in/doctor/api/v1.php";
-    $baseUrl = "https://freelancing.codingfrontend.in/doctor/";
-    $adminBaseUrl = "https://freelancing.codingfrontend.in/doctor/";
-    $uploadsDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/uploads/";
-    $baseDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/";
-} else {
-    define('HOSTNAME', 'localhost');
-    define('SITE_URL', 'https://nalamecoproducts.com/');
-    define('CDN_URL', 'https://nalamecoproducts.com/cdn/');
-    define('DB_USERNAME', 'tentrecen_nalam');
-    define('DB_DATABASE', 'tentrecen_nalam');
-    define('DB_PASSWORD', 'zP3BxTwgRSBI');
-    define("BASE_PATH", "/home/tentrecen/nalamecoproducts.com/");
-    $apiUrl = "https://nalamecoproducts.com/api/v1.php";
-    $baseUrl = "https://nalamecoproducts.com/";
-    $adminBaseUrl = "https://nalamecoproducts.com/";
-    $uploadsDirectory = "/home/tentrecen/nalamecoproducts.com/uploads/";
-    $baseDirectory = "/home/tentrecen/nalamecoproducts.com/";
-}
+$apiUrl = "https://freelancing.codingfrontend.in/doctor/api/v1.php";
+$baseUrl = "https://freelancing.codingfrontend.in/doctor/";
+$adminBaseUrl = "https://freelancing.codingfrontend.in/doctor/";
+$uploadsDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/uploads/";
+$baseDirectory = "/home/u707479837/domains/codingfrontend.in/public_html/freelancing/doctor/";
 
 $phoneRegex = "/^[0-9]{10}$/";
 $pincodeRegex = "/^[0-9]{6}$/";

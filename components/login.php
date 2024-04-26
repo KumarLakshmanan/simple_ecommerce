@@ -159,7 +159,7 @@ $_SESSION['csrfToken'] = $csrfToken;
     <div class="grid">
         <form action="<?= $adminBaseUrl ?>api/v1.php" method="POST" class="form login">
             <input type="hidden" name="mode" value="adminlogin">
-            <h2 class="login__title">Login to Ecommerce Admin</h2>
+            <h2 class="login__title">Login to <br/>Hospital information system</h2>
             <div class="form__field">
                 <label for="login__username"><svg class="icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
