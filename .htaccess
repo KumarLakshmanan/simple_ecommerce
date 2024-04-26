@@ -1,0 +1,25 @@
+RewriteEngine On
+
+
+<IfModule mod_speling.c>
+    CheckSpelling Off
+</IfModule>
+Options -Indexes
+
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+RewriteRule ^home index.php?id=home [NC,QSA,L]
+RewriteRule ^book index.php?id=book [NC,QSA,L]
+RewriteRule ^viewbooking index.php?id=viewbooking [NC,QSA,L]
+
+RewriteRule ^addproduct index.php?id=addproduct [NC,QSA,L]
+RewriteRule ^editproduct index.php?id=editproduct [NC,QSA,L]
+
+RewriteRule ^logout components/logout.php [NC,QSA,L]
