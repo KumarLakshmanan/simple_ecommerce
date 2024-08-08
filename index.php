@@ -8,11 +8,6 @@ if (isset($_GET["page"])) {
 	$pageNumber = 1;
 }
 
-// $sql = "SELECT * FROM products ORDER BY id DESC";
-// $stmt = $pdoConn->prepare($sql);
-// $stmt->execute();
-// $result = $stmt->fetchAll();
-
 $sql = "SELECT * FROM products ORDER BY id DESC";
 $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 
@@ -35,16 +30,16 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 <body>
 	<nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.php"><img src='images/logo.png' width='200px' style='margin-right:10px;'></a>
+			<a class="navbar-brand" href="#"><img src='images/logo.png' width='200px' style='margin-right:10px;'></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto mr-md-3">
-					<li class="nav-item <?= $pageNumber == 1 ? "active" : "" ?>"><a href="index.php?page=1" class="nav-link">Distributor</a></li>
-					<li class="nav-item <?= $pageNumber == 2 ? "active" : "" ?>"><a href="index.php?page=2" class="nav-link">Retailer</a></li>
-					<li class="nav-item <?= $pageNumber == 3 ? "active" : "" ?>"><a href="index.php?page=3" class="nav-link">Product Details</a></li>
-				</ul>
+				<!--<ul class="navbar-nav ml-auto mr-md-3">-->
+				<!--	<li class="nav-item <?= $pageNumber == 1 ? "active" : "" ?>"><a href="index.php?page=1" class="nav-link">Distributor</a></li>-->
+				<!--	<li class="nav-item <?= $pageNumber == 2 ? "active" : "" ?>"><a href="index.php?page=2" class="nav-link">Retailer</a></li>-->
+				<!--	<li class="nav-item <?= $pageNumber == 3 ? "active" : "" ?>"><a href="index.php?page=3" class="nav-link">Product Details</a></li>-->
+				<!--</ul>-->
 			</div>
 		</div>
 	</nav>
@@ -53,18 +48,19 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 			<table class="table no-wrap bDataTable" id="bDataTable">
 				<thead>
 					<tr>
-						<th class="border-top-0" width="30px">#</th>
+						<th class="border-top-0" width="30px">ID</th>
 						<th style="white-space: nowrap;" class="border-top-0">Product Name</th>
+						<th style="white-space: nowrap;" class="border-top-0">MRP (₹)</th>
 						<?php
 						if ($pageNumber == 1) {
 						?>
-							<th style="white-space: nowrap;" class="border-top-0">Distributor Price</th>
+							<th style="white-space: nowrap;" class="border-top-0">Distributor Price (₹)</th>
 						<?php
 						}
 						if ($pageNumber != 3) {
 						?>
-							<th style="white-space: nowrap;" class="border-top-0">Retailer Price</th>
-							<th style="white-space: nowrap;" class="border-top-0">MRP</th>
+							<th style="white-space: nowrap;" class="border-top-0">Shop Price (₹)</th>
+							
 						<?php
 						}
 						?>
@@ -75,13 +71,14 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 					foreach ($result as $key => $value) {
 					?>
 						<tr>
-							<td style="white-space: nowrap;">NTP-<?php echo $value['id']; ?></td>
+							<td style="white-space: nowrap;">NTP <?php echo $value['id']; ?></td>
 							<td>
 								<?php
 								$images = explode(",", $value['product_images']);
 								echo "<img src='admin/uploads/images/" . $images[0] . "' width='100px' style='margin-right:10px;'>" . $value['product_name'];
 								?>
 							</td>
+							<td><?php echo $value['mrp_price']; ?></td>
 							<?php
 							if ($pageNumber == 1) {
 							?>
@@ -91,7 +88,6 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 							if ($pageNumber != 3) {
 							?>
 								<td><?php echo $value['retailer_price']; ?></td>
-								<td><?php echo $value['mrp_price']; ?></td>
 							<?php
 							}
 							?>
