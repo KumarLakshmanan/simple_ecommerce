@@ -2,13 +2,8 @@
 session_start();
 include("./admin/lib/config.php");
 
-if (isset($_GET["page"])) {
-	$pageNumber = $_GET["page"];
-} else {
-	$pageNumber = 1;
-}
 
-$sql = "SELECT * FROM products ORDER BY id DESC";
+$sql = "SELECT * FROM products WHERE status = 1  ORDER BY id DESC";
 $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 
 ?>
@@ -34,13 +29,6 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<!--<ul class="navbar-nav ml-auto mr-md-3">-->
-				<!--	<li class="nav-item <?= $pageNumber == 1 ? "active" : "" ?>"><a href="index.php?page=1" class="nav-link">Distributor</a></li>-->
-				<!--	<li class="nav-item <?= $pageNumber == 2 ? "active" : "" ?>"><a href="index.php?page=2" class="nav-link">Retailer</a></li>-->
-				<!--	<li class="nav-item <?= $pageNumber == 3 ? "active" : "" ?>"><a href="index.php?page=3" class="nav-link">Product Details</a></li>-->
-				<!--</ul>-->
-			</div>
 		</div>
 	</nav>
 	<div style="overflow-x:auto;">
@@ -51,19 +39,9 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 						<th class="border-top-0" width="30px">ID</th>
 						<th style="white-space: nowrap;" class="border-top-0">Product Name</th>
 						<th style="white-space: nowrap;" class="border-top-0">MRP (₹)</th>
-						<?php
-						if ($pageNumber == 1) {
-						?>
-							<th style="white-space: nowrap;" class="border-top-0">Distributor Price (₹)</th>
-						<?php
-						}
-						if ($pageNumber != 3) {
-						?>
-							<th style="white-space: nowrap;" class="border-top-0">Shop Price (₹)</th>
-							
-						<?php
-						}
-						?>
+						<th style="white-space: nowrap;" class="border-top-0">Distributor Price (₹)</th>
+						<th style="white-space: nowrap;" class="border-top-0">Shop Price (₹)</th>
+						<th style="white-space: nowrap;" class="border-top-0">Availability</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,18 +57,9 @@ $result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
 								?>
 							</td>
 							<td><?php echo $value['mrp_price']; ?></td>
-							<?php
-							if ($pageNumber == 1) {
-							?>
-								<td><?php echo $value['distributor_price']; ?></td>
-							<?php
-							}
-							if ($pageNumber != 3) {
-							?>
-								<td><?php echo $value['retailer_price']; ?></td>
-							<?php
-							}
-							?>
+							<td><?php echo $value['distributor_price']; ?></td>
+							<td><?php echo $value['retailer_price']; ?></td>
+							<td><?php echo $value['available'] == 1 ? "Available" : "Out of Stock"; ?></td>
 						</tr>
 					<?php
 					}

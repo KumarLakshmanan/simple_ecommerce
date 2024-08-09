@@ -47,6 +47,24 @@ if (isset($_GET['productid'])) {
                     <textarea rows="5" class="form-control texteditor-content" id="description" placeholder="Enter product description" required><?php echo ($propertyEdit[0]['product_description']); ?></textarea>
                 </div>
             </div>
+            <div class="col-md-6">
+                <h6>Product Availability *</h6>
+                <div class="p-2">
+                    <select class="form-control" id="availability">
+                        <option value="1" <?php echo ($propertyEdit[0]['available'] == 1) ? "selected" : ""; ?>>Available</option>
+                        <option value="0" <?php echo ($propertyEdit[0]['available'] == 0) ? "selected" : ""; ?>>Out of Stock</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6>Product Status *</h6>
+                <div class="p-2">
+                    <select class="form-control" id="status">
+                        <option value="1" <?php echo ($propertyEdit[0]['status'] == 1) ? "selected" : ""; ?>>Public</option>
+                        <option value="0" <?php echo ($propertyEdit[0]['status'] == 0) ? "selected" : ""; ?>>Private</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="p-2">
                     <label for="images">Product Images *</label>
@@ -77,6 +95,8 @@ if (isset($_GET['productid'])) {
                 var retailer_price = $("#retailer_price").val();
                 var mrp_price = $("#mrp_price").val();
                 var description = $("#description").val();
+                var availability = $("#availability").val();
+                var status = $("#status").val();
                 var images = [];
 
                 $(".uploaded-image").each(function() {
@@ -106,6 +126,8 @@ if (isset($_GET['productid'])) {
                             formData.append("retailer_price", retailer_price);
                             formData.append("mrp_price", mrp_price);
                             formData.append("product_images", images);
+                            formData.append("available", availability);
+                            formData.append("status", status);
                             formData.append("productid", "<?= $propertyEdit[0]['id'] ?>");
                             $(".preloader").show();
 

@@ -28,6 +28,24 @@
 			<input type="text" class="form-control" id="mrp_price" placeholder="Enter product mrp price" required>
 		</div>
 	</div>
+	<div class="col-md-6">
+		<h6>Product Availability *</h6>
+		<div class="p-2">
+			<select class="form-control" id="availability">
+				<option value="1">Available</option>
+				<option value="0">Out of Stock</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h6>Product Status *</h6>
+		<div class="p-2">
+			<select class="form-control" id="status">
+				<option value="1">Public</option>
+				<option value="0">Private</option>
+			</select>
+		</div>
+	</div>
 	<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 		<div class="p-2">
 			<label for="images">Product Images *</label>
@@ -55,6 +73,8 @@
         var distributor_price = $("#distributor_price").val();
         var retailer_price = $("#retailer_price").val();
         var mrp_price = $("#mrp_price").val();
+		var availability = $("#availability").val();
+		var status = $("#status").val();
 		var images = [];
 		$(".uploaded-image").each(function() {
 			images.push($(this).attr("data-name"));
@@ -83,6 +103,8 @@
                     formData.append("retailer_price", retailer_price);
                     formData.append("mrp_price", mrp_price);
                     formData.append("product_images", images);
+					formData.append("available", availability);
+					formData.append("status", status);
 					$(".preloader").show();
 
 					$.ajax({

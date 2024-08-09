@@ -123,7 +123,9 @@ if (isset($_REQUEST["mode"])) {
             isset($_REQUEST['distributor_price']) &&
             isset($_REQUEST['retailer_price']) &&
             isset($_REQUEST['mrp_price']) &&
-            isset($_REQUEST['product_images'])
+            isset($_REQUEST['product_images']) &&
+            isset($_REQUEST['available']) &&
+            isset($_REQUEST['status'])
         ) {
             $name = trim(htmlspecialchars($_REQUEST['product_name']));
             $description  = trim(htmlspecialchars($_REQUEST['product_description']));
@@ -131,30 +133,27 @@ if (isset($_REQUEST["mode"])) {
             $retailer_price = trim(htmlspecialchars($_REQUEST['retailer_price']));
             $mrp_price = trim(htmlspecialchars($_REQUEST['mrp_price']));
             $images = trim(htmlspecialchars($_REQUEST['product_images']));
+            $available = trim(htmlspecialchars($_REQUEST['available']));
+            $status = trim(htmlspecialchars($_REQUEST['status']));
+
             $token = trim(htmlspecialchars($_SESSION['token']));
             $email  = trim(htmlspecialchars($_SESSION['email']));
 
             try {
-                $userAuth  = validateSessionToken($mysqli, $token, $email);
-                if ($userAuth) {
-                    $username  = $userAuth['username'];
-                    // $sql = "INSERT INTO products (product_name, product_description, distributor_price, retailer_price, mrp_price, product_images, created_at) VALUES (:name, :description, :distributor_price, :retailer_price, :mrp_price, :image, NOW())";
-                    // $stmt = $pdoConn->prepare($sql);
-                    // $stmt->bindParam(":name", $name);
-                    // $stmt->bindParam(":description", $description);
-                    // $stmt->bindParam(":distributor_price", $distributor_price);
-                    // $stmt->bindParam(":retailer_price", $retailer_price);
-                    // $stmt->bindParam(":mrp_price", $mrp_price);
-                    // $stmt->bindParam(":image", $images);
-                    // $stmt->execute();
-                    $sql = "INSERT INTO products (product_name, product_description, distributor_price, retailer_price, mrp_price, product_images, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())";
-                    $stmt = $mysqli->prepare($sql);
-                    $stmt->bind_param('ssssss', $name, $description, $distributor_price, $retailer_price, $mrp_price, $images);
-                    $stmt->execute();
-                    $json["error"] = array("code" => "#200", "description" => "Success.");
-                } else {
-                    $json["error"] = array("code" => "#400", "description" => "Invalid token.");
-                }
+                // $sql = "INSERT INTO products (product_name, product_description, distributor_price, retailer_price, mrp_price, product_images, created_at) VALUES (:name, :description, :distributor_price, :retailer_price, :mrp_price, :image, NOW())";
+                // $stmt = $pdoConn->prepare($sql);
+                // $stmt->bindParam(":name", $name);
+                // $stmt->bindParam(":description", $description);
+                // $stmt->bindParam(":distributor_price", $distributor_price);
+                // $stmt->bindParam(":retailer_price", $retailer_price);
+                // $stmt->bindParam(":mrp_price", $mrp_price);
+                // $stmt->bindParam(":image", $images);
+                // $stmt->execute();
+                $sql = "INSERT INTO products (product_name, product_description, distributor_price, retailer_price, mrp_price, product_images, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+                $stmt = $mysqli->prepare($sql);
+                $stmt->bind_param('ssssss', $name, $description, $distributor_price, $retailer_price, $mrp_price, $images);
+                $stmt->execute();
+                $json["error"] = array("code" => "#200", "description" => "Success.");
             } catch (Exception $e) {
                 $json["error"] = array("code" => "#500", "description" => $e->getMessage());
             }
@@ -169,6 +168,8 @@ if (isset($_REQUEST["mode"])) {
             isset($_REQUEST['distributor_price']) &&
             isset($_REQUEST['retailer_price']) &&
             isset($_REQUEST['mrp_price']) &&
+            isset($_REQUEST['available']) &&
+            isset($_REQUEST['status']) &&
             isset($_REQUEST['product_images'])
         ) {
             $id = trim(htmlspecialchars($_REQUEST['productid']));
@@ -178,6 +179,8 @@ if (isset($_REQUEST["mode"])) {
             $retailer_price = trim(htmlspecialchars($_REQUEST['retailer_price']));
             $mrp_price = trim(htmlspecialchars($_REQUEST['mrp_price']));
             $images = trim(htmlspecialchars($_REQUEST['product_images']));
+            $available = trim(htmlspecialchars($_REQUEST['available']));
+            $status = trim(htmlspecialchars($_REQUEST['status']));
             try {
                 // $sql = "UPDATE products SET product_name = :name, product_description = :description, distributor_price = :distributor_price, retailer_price = :retailer_price, mrp_price = :mrp_price, product_images = :image WHERE id = :id";
                 // $stmt = $pdoConn->prepare($sql);
@@ -189,9 +192,9 @@ if (isset($_REQUEST["mode"])) {
                 // $stmt->bindParam(":image", $images);
                 // $stmt->bindParam(":id", $id);
                 // $stmt->execute();
-                $sql = "UPDATE products SET product_name = ?, product_description = ?, distributor_price = ?, retailer_price = ?, mrp_price = ?, product_images = ? WHERE id = ?";
+                $sql = "UPDATE products SET product_name = ?, product_description = ?, distributor_price = ?, retailer_price = ?, mrp_price = ?, product_images = ?, available = ?, status = ? WHERE id = ?";
                 $stmt = $mysqli->prepare($sql);
-                $stmt->bind_param('ssssssi', $name, $description, $distributor_price, $retailer_price, $mrp_price, $images, $id);
+                $stmt->bind_param('ssssssiii', $name, $description, $distributor_price, $retailer_price, $mrp_price, $images, $available, $status, $id);
                 $stmt->execute();
                 $json["error"] = array("code" => "#200", "description" => "Success.");
             } catch (Exception $e) {
